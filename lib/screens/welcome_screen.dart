@@ -1,3 +1,4 @@
+import 'package:bit_chat/constants.dart';
 import 'package:flutter/material.dart';
 
 class WelcomeScreen extends StatefulWidget {
@@ -36,7 +37,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 borderRadius: BorderRadius.circular(30.0),
                 child: MaterialButton(
                   onPressed: () {
-                    //Go to login screen.
+                    Navigator.pushNamed(context, kScreens.login_screen);
                   },
                   minWidth: 200.0,
                   height: 42.0,
@@ -54,7 +55,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 elevation: 5.0,
                 child: MaterialButton(
                   onPressed: () {
-                    //Go to registration screen.
+                    Navigator.pushNamed(context, kScreens.registration_screen);
                   },
                   minWidth: 200.0,
                   height: 42.0,

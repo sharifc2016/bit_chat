@@ -11,13 +11,6 @@ class BitChat extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        theme: ThemeData.dark().copyWith(
-          textTheme: TextTheme(
-            bodyText2: TextStyle(
-              color: Colors.black54,
-            ),
-          ),
-        ),
         initialRoute: kScreens.welcome_screen,
         routes: {
           kScreens.welcome_screen: (context) => WelcomeScreen(),

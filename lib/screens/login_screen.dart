@@ -15,10 +15,15 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Container(
-              height: 200.0,
-              child: Image.asset('images/logo.png'),
+          children: [
+            Center(
+              child: Text(
+                'Login',
+                style: TextStyle(
+                  fontSize: 45.0,
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
             ),
             SizedBox(
               height: 48.0,
