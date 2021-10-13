@@ -17,12 +17,15 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Center(
-              child: Text(
-                'Flash Chat',
-                style: TextStyle(
-                  fontSize: 45.0,
-                  fontWeight: FontWeight.w900,
+            Hero(
+              tag: 'title',
+              child: Center(
+                child: Text(
+                  'Bit Chat',
+                  style: TextStyle(
+                    fontSize: 45.0,
+                    fontWeight: FontWeight.w900,
+                  ),
                 ),
               ),
             ),

@@ -15,7 +15,19 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
+          children: [
+            Hero(
+              tag: 'title',
+              child: Center(
+                child: Text(
+                  'Bit Chat',
+                  style: TextStyle(
+                    fontSize: 15.0,
+                    fontWeight: FontWeight.w300,
+                  ),
+                ),
+              ),
+            ),
             Center(
               child: Text(
                 'Register',

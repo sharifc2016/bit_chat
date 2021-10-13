@@ -12,3 +12,7 @@
 ## navigation
 
 `Navigator.pushNamed(context, 'login_screen');`
+
+## navigation animation
+
+`https://flutter.dev/docs/development/ui/animations/hero-animations`

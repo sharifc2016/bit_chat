@@ -16,6 +16,18 @@ class _LoginScreenState extends State<LoginScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            Hero(
+              tag: 'title',
+              child: Center(
+                child: Text(
+                  'Bit Chat',
+                  style: TextStyle(
+                    fontSize: 15.0,
+                    fontWeight: FontWeight.w300,
+                  ),
+                ),
+              ),
+            ),
             Center(
               child: Text(
                 'Login',
