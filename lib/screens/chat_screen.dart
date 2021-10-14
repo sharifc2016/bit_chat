@@ -19,6 +19,7 @@ class _ChatScreenState extends State<ChatScreen> {
     // TODO: implement initState
     super.initState();
     getCurrentUser();
+    getMessages();
   }
 
   void getCurrentUser() {
@@ -33,6 +34,18 @@ class _ChatScreenState extends State<ChatScreen> {
     }
   }
 
+  void getMessages() async {
+    try {
+      final messages = await _firestore.collection("messages").get();
+      print("======messages");
+      messages.docs.forEach((element) {
+        print(element.data());
+      });
+    } catch (e) {
+      print(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,8 +55,9 @@ class _ChatScreenState extends State<ChatScreen> {
           IconButton(
               icon: Icon(Icons.close),
               onPressed: () async {
-                await _auth.signOut();
-                Navigator.pushNamed(context, kScreens.login_screen);
+                // await _auth.signOut();
+                // Navigator.pushNamed(context, kScreens.login_screen);
+                getMessages();
               }),
         ],
         title: Text('⚡️Chat'),
