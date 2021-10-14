@@ -78,17 +78,24 @@ class _ChatScreenState extends State<ChatScreen> {
             StreamBuilder<QuerySnapshot>(
               stream: _firestore.collection("messages").snapshots(),
               builder: (context, snapshot) {
-                List<Text> messageWidgets = [];
-                if (snapshot.hasData) {
-                  final messages = snapshot.data!.docs;
-                  for (var message in messages) {
-                    final messageText = message.data().toString();
-                    final messageWidget = Text(messageText);
-                    messageWidgets.add(messageWidget);
-                  }
+                List<MessageListItem> messageListItems = [];
+                if (!snapshot.hasData) {
+                  return Center(
+                    child: CircularProgressIndicator(
+                      backgroundColor: Colors.lightBlueAccent,
+                    ),
+                  );
                 }
-                return Column(
-                  children: messageWidgets,
+                final messages = snapshot.data!.docs;
+                for (var message in messages) {
+                  final messageListItem =
+                      MessageListItem(message['sender'], message['text']);
+                  messageListItems.add(messageListItem);
+                }
+                return Expanded(
+                  child: ListView(
+                    children: messageListItems,
+                  ),
                 );
               },
             ),
@@ -125,6 +132,39 @@ class _ChatScreenState extends State<ChatScreen> {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class MessageListItem extends StatelessWidget {
+  final String sender;
+  final String text;
+
+  MessageListItem(this.sender, this.text);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(
+        vertical: 5.0,
+        horizontal: 10.0,
+      ),
+      child: Material(
+        borderRadius: BorderRadius.circular(30.0),
+        color: Colors.lightBlueAccent,
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            vertical: 10.0,
+            horizontal: 20.0,
+          ),
+          child: Text(
+            '$sender - $text',
+            style: TextStyle(
+              fontSize: 20.0,
+            ),
+          ),
         ),
       ),
     );
