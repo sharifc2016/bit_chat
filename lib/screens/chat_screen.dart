@@ -46,6 +46,14 @@ class _ChatScreenState extends State<ChatScreen> {
     }
   }
 
+  void messagesStream() async {
+    await for (var snapshot in _firestore.collection("messages").snapshots()) {
+      for (var message in snapshot.docs) {
+        print(message.data());
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,9 +63,8 @@ class _ChatScreenState extends State<ChatScreen> {
           IconButton(
               icon: Icon(Icons.close),
               onPressed: () async {
-                // await _auth.signOut();
-                // Navigator.pushNamed(context, kScreens.login_screen);
-                getMessages();
+                await _auth.signOut();
+                Navigator.pushNamed(context, kScreens.login_screen);
               }),
         ],
         title: Text('⚡️Chat'),
@@ -67,7 +74,24 @@ class _ChatScreenState extends State<ChatScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
+          children: [
+            StreamBuilder<QuerySnapshot>(
+              stream: _firestore.collection("messages").snapshots(),
+              builder: (context, snapshot) {
+                List<Text> messageWidgets = [];
+                if (snapshot.hasData) {
+                  final messages = snapshot.data!.docs;
+                  for (var message in messages) {
+                    final messageText = message.data().toString();
+                    final messageWidget = Text(messageText);
+                    messageWidgets.add(messageWidget);
+                  }
+                }
+                return Column(
+                  children: messageWidgets,
+                );
+              },
+            ),
             Container(
               decoration: kMessageContainerDecoration,
               child: Row(
