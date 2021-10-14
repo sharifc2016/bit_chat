@@ -36,8 +36,9 @@ class _ChatScreenState extends State<ChatScreen> {
         actions: <Widget>[
           IconButton(
               icon: Icon(Icons.close),
-              onPressed: () {
-                //Implement logout functionality
+              onPressed: () async {
+                await _auth.signOut();
+                Navigator.pushNamed(context, kScreens.login_screen);
               }),
         ],
         title: Text('⚡️Chat'),
